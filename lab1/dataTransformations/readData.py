@@ -6,6 +6,6 @@ def readMatrix(file_name):
 
 def readList(file_name):
   with open(file_name, 'r') as file:
-    result = [[num for num in line.split().pop(0)] for line in file]
+    result = [[num for num in line.split()[1:]] for line in file]
   
   return result
