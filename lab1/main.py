@@ -2,35 +2,40 @@ import sys
 
 from dataTransformations.readData import *
 from dataTransformations.convertData import *
+from dataTransformations.displayData import *
 from utils import *
 
 
 def main(mode, file_name):
-  # apply proper convert method based on execution flag
   if(mode == "NM"):
-    data = readMatrix(file_name)
-    converted = convertNeighbourMatrix(data)
+    neighbourMatrix = readMatrix(file_name)
+    incidentMatrix, neighbourList = convertNeighbourMatrix(neighbourMatrix)
+
+    displayMatrix(incidentMatrix)
+    displayList(neighbourList)
+
+    drawGraph(neighbourMatrix)
 
   elif(mode == "IN"):
-    data = readMatrix(file_name)
-    converted = convertIncidentMatrix(data)
+    incidentMatrix = readMatrix(file_name)
+    neighbourMatrix, neighbourList = convertIncidentMatrix(incidentMatrix)
+    
+    displayMatrix(neighbourMatrix)
+    displayList(neighbourList)
+
+    drawGraph(neighbourMatrix)
 
   elif(mode == "NL"):
-    data = readList(file_name)
-    converted = convertNeighbourList(data)
+    neighbourList = readList(file_name)
+    neighbourMatrix, incidentMatrix = convertNeighbourList(data)
+
+    displayMatrix(neighbourMatrix)
+    displayMatrix(incidentMatrix)
+
+    drawGraph(neighbourMatrix)
     
   else:
     sys.exit('Please provide valide mode, [NM, IN, NL]')
-  
-  # two other representations other than provided one
-  result1, result2 = converted
-
-  # print converted representations
-  displayRsult(result1)
-  displayRsult(result2)
-
-  # draw the graph
-  drawGraph(data)
 
 if __name__ == '__main__':
   programArguments = sys.argv
