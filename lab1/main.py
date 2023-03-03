@@ -27,7 +27,7 @@ def main(mode, file_name):
 
   elif(mode == "NL"):
     neighbourList = readList(file_name)
-    neighbourMatrix, incidentMatrix = convertNeighbourList(data)
+    neighbourMatrix, incidentMatrix = convertNeighbourList(neighbourList)
 
     displayMatrix(neighbourMatrix)
     displayMatrix(incidentMatrix)
