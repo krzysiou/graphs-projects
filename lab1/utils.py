@@ -1,7 +1,6 @@
 import igraph as ig
 import matplotlib.pyplot as plt
 
-
 def generateEdgesList(neighbourList):
   edges = []
 
@@ -11,6 +10,16 @@ def generateEdgesList(neighbourList):
 
   return edges
 
+def matrixOfZeros(sizeX, sizeY):
+    matrix = []
+
+    for _ in range(sizeX):
+        temp = []
+        for _ in range(sizeY):
+            temp.append(0)
+        matrix.append(temp)
+
+    return matrix
 
 def drawGraph(neighbourList):
   g = ig.Graph(len(neighbourList), generateEdgesList(neighbourList))
