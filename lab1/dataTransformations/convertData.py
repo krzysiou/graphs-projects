@@ -1,11 +1,23 @@
+from dataTransformations.helperMethods import *
+
 def convertNeighbourMatrix(neighbourMatrix):
-    # code here
-    print(1)
+    #####  NM -> IN
+    incidentMatrix = nm2in(neighbourMatrix)
+    #####  NM -> NL
+    neighbourList = in2nl(incidentMatrix)
+    return incidentMatrix, neighbourList
+
 
 def convertIncidentMatrix(incidentMatrix):
-    #code here
-    print(1)
+    #####  IN -> NL
+    neighbourList = in2nl(incidentMatrix)
+    #####  IN -> NM
+    neighbourMatrix = nl2nm(neighbourList)
+    return neighbourList, neighbourMatrix
 
-def convertNeighbourList(data):
-    #code here
-    print(1)
+def convertNeighbourList(neighbourList):
+    ######  NL -> NM
+    neighbourMatrix = nl2nm(neighbourList)
+    #####  NL -> IN
+    incidentMatrix = nm2in(neighbourMatrix)
+    return neighbourMatrix, incidentMatrix

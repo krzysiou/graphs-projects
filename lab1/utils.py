@@ -1,3 +1,5 @@
+import numpy as np  #
+
 def drawGraph(neighbourMatrix):
     #code here
-    print(1)
+    print(neighbourMatrix)
