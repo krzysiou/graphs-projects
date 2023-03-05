@@ -4,9 +4,11 @@ import matplotlib.pyplot as plt
 
 def generateEdgesList(neighbourList):
   edges = []
+
   for index, neighbours in enumerate(neighbourList):
-    edges.extend((index, neighbour - 1)
-                 for neighbour in neighbours if neighbour - 1 < index)
+    edges.extend((index, neighbour - 1)         
+    for neighbour in neighbours if neighbour - 1 < index)
+
   return edges
 
 
@@ -14,11 +16,11 @@ def drawGraph(neighbourList):
   g = ig.Graph(len(neighbourList), generateEdgesList(neighbourList))
   g.vs['id'] = [i + 1 for i in range(len(neighbourList))]
 
-  fig, ax = plt.subplots()
+  _, ax = plt.subplots()
   ig.plot(
     g,
     target=ax,
-    layout="circle",  # print nodes in a circular layout
+    layout="circle",
     vertex_size=0.25,
     vertex_color="#d9d9ff",
     vertex_frame_width=1.0,

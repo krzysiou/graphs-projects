@@ -11,28 +11,28 @@ def main(mode, file_name):
     neighbourMatrix = readMatrix(file_name)
     incidentMatrix, neighbourList = convertNeighbourMatrix(neighbourMatrix)
 
-    # displayMatrix(incidentMatrix)
-    # displayList(neighbourList)
+    displayMatrix(incidentMatrix)
+    displayList(neighbourList)
 
-    drawGraph(neighbourMatrix)
+    drawGraph(neighbourList)
 
   elif (mode == "IN"):
     incidentMatrix = readMatrix(file_name)
     neighbourList, neighbourMatrix = convertIncidentMatrix(incidentMatrix)
     
-    # displayMatrix(neighbourMatrix)
-    # displayList(neighbourList)
+    displayMatrix(neighbourMatrix)
+    displayList(neighbourList)
 
-    drawGraph(neighbourMatrix)
+    drawGraph(neighbourList)
 
   elif (mode == "NL"):
     neighbourList = readList(file_name)
     neighbourMatrix, incidentMatrix = convertNeighbourList(neighbourList)
     
-    # displayMatrix(neighbourMatrix)
-    # displayMatrix(incidentMatrix)
+    displayMatrix(neighbourMatrix)
+    displayMatrix(incidentMatrix)
 
-    drawGraph(neighbourMatrix)
+    drawGraph(neighbourList)
 
   else:
     sys.exit('Please provide valide mode, [NM, IN, NL]')
