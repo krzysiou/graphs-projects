@@ -15,5 +15,20 @@ def convertNeighbourList(neighbourList):
     for neighbour in vertexNeighbours:
       neighbourMatrix[vertexIndex][neighbour - 1] = 1
 
-  print(neighbourMatrix)
-  return [neighbourMatrix, [0]]
+  numberOfEdges = np.count_nonzero(neighbourMatrix == 1) // 2
+  incidentMatrix = np.zeros((numberOfVertices, numberOfEdges), dtype='int')
+
+  edgeCount = 0
+  edgesOfVertex = {}
+  for vertexIndex, vertexNeighbours in enumerate(neighbourList):
+    edgesOfVertex[vertexIndex + 1] = {}
+    for neighbour in vertexNeighbours:
+      if neighbour - 1 > vertexIndex:
+        incidentMatrix[vertexIndex][edgeCount] = 1
+        edgesOfVertex[vertexIndex + 1][neighbour] = edgeCount + 1
+        edgeCount += 1
+      else:
+        edgeIndex = edgesOfVertex[neighbour][vertexIndex + 1]
+        incidentMatrix[vertexIndex][edgeIndex - 1] = 1
+
+  return [neighbourMatrix, incidentMatrix]
