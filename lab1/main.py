@@ -32,8 +32,8 @@ def main(mode, file_name):
     displayMatrix(neighbourMatrix)
     displayMatrix(incidentMatrix)
 
-    drawGraph(neighbourMatrix)
-    
+    drawGraph(neighbourList)
+
   else:
     sys.exit('Please provide valide mode, [NM, IN, NL]')
 
