@@ -13,6 +13,8 @@ def convertNeighbourList(neighbourList):
   neighbourMatrix = np.zeros((numberOfVertices, numberOfVertices))
   for vertexIndex, vertexNeighbours in enumerate(neighbourList):
     for neighbour in vertexNeighbours:
+      if neighbour - 1 >= numberOfVertices:
+        raise ValueError("Wrong neighbour list matrix")
       neighbourMatrix[vertexIndex][neighbour - 1] = 1
 
   numberOfEdges = np.count_nonzero(neighbourMatrix == 1) // 2
