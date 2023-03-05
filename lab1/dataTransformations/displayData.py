@@ -1,7 +1,7 @@
 def displayMatrix(data):
   for row in data:
     for element in row:
-      print(element + " ", end="")
+      print(str(element) + " ", end="")
     print()
 
 def displayList(data):
@@ -10,5 +10,5 @@ def displayList(data):
     print(str(n) + ". ", end="")
     n += 1
     for element in row:
-      print(element + " ", end="")
+      print(str(element) + " ", end="")
     print()
