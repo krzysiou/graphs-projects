@@ -2,15 +2,20 @@ import numpy as np
 
 
 def convertNeighbourMatrix(neighbourMatrix):
-    # code here
-    print(1)
+  # code here
+  print(1)
+
 
 def convertIncidentMatrix(incidentMatrix):
-    #code here
-    print(1)
+  # code here
+  print(1)
+
+
 def convertNeighbourList(neighbourList):
   numberOfVertices = len(neighbourList)
-  neighbourMatrix = np.zeros((numberOfVertices, numberOfVertices))
+
+  neighbourMatrix = np.zeros(
+      (numberOfVertices, numberOfVertices), dtype='int')
   for vertexIndex, vertexNeighbours in enumerate(neighbourList):
     for neighbour in vertexNeighbours:
       if neighbour - 1 >= numberOfVertices:
