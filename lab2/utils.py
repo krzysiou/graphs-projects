@@ -49,3 +49,10 @@ def sortList(A, mode="asc"):
   mode = 1 if mode == "asc" else -1 if mode == "desc" else 0
   A[:] = list(mode * np.sort(mode * np.array(A)))
 
+
+def sortDict(A, mode="asc"):
+  reverse = True if mode == "desc" else False
+  B = {k: v for k, v in sorted(
+    A.items(), reverse=reverse, key=lambda item: item[1])}
+  A.clear()
+  A.update(B)
