@@ -20,3 +20,27 @@ def degree_seq(A, verbose=False):
     if verbose:
       print(A)
 
+
+def constructNLFromSeq(A, verbose=False):
+  if not degree_seq(A):
+    raise Exception("Wrong sequence")
+  n = len(A)
+  A = np.array(A)
+  A = {index + 1: val for index, val in enumerate(A)}
+  sortDict(A, mode="desc")
+  if verbose:
+    print(A)
+  neighbourList = [[] for _ in range(n)]
+
+  while True:
+    if np.all(np.array(list(A.values())) == 0):
+      return neighbourList
+
+    for i in range(1, list(A.values())[0] + 1):
+      A[list(A.keys())[i]] = A[list(A.keys())[i]] - 1
+      neighbourList[list(A.keys())[0] - 1].append(list(A.keys())[i] - 1)
+
+    A[list(A.keys())[0]] = 0
+    sortDict(A, mode="desc")
+    if verbose:
+      print(A)
