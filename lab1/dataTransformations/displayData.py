@@ -1,14 +1,15 @@
 def displayMatrix(data):
-  for row in data:
-    for element in row:
-      print(str(element) + " ", end="")
-    print()
+    for row in data:
+        for element in row:
+            print(str(element) + " ", end="")
+        print()
+
 
 def displayList(data):
-  n = 1
-  for row in data:
-    print(str(n) + ". ", end="")
-    n += 1
-    for element in row:
-      print(str(element) + " ", end="")
-    print()
+    n = 1
+    for row in data:
+        print(str(n) + ". ", end="")
+        n += 1
+        for element in row:
+            print(str(element) + " ", end="")
+        print()
