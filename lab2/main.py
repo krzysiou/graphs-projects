@@ -10,8 +10,14 @@ def main(mode, file_name):
     seqArray = readLine(file_name)
     print(f'Graph sequence: {degree_seq(seqArray)}')
     drawGraph(constructNLFromSeq(seqArray))
+  elif (mode == "task2"):
+    seqArray = readLine(file_name)
+    numberOfRands = int(input("Write number of randomizations: "))
+    neighbourList = constructNLFromSeq(seqArray)
+    randEdges = randomizeEdges(neighbourList, numberOfRands, verbose=True)
+    drawGraph(randEdges, "EL")
   else:
-    sys.exit('Please provide valide mode, [task1]')
+    sys.exit('Please provide valide mode, [task1, task2]')
 
 
 if __name__ == '__main__':
@@ -19,6 +25,6 @@ if __name__ == '__main__':
 
   if (len(programArguments) != 3):
     sys.exit(
-      'Please provide two arguments, first is the mode [task1], second one is input file name.')
+      'Please provide two arguments, first is the mode [task1, task2], second one is input file name.')
 
   main(programArguments[1], programArguments[2])
