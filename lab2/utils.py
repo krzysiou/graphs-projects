@@ -23,10 +23,13 @@ def matrixOfZeros(sizeX, sizeY):
   return matrix
 
 
-def drawGraph(neighbourList):
-  g = ig.Graph(len(neighbourList), generateEdgesList(neighbourList))
-  g.vs['id'] = [i + 1 for i in range(len(neighbourList))]
-
+def drawGraph(list, inputType="NL"):
+  if inputType == "NL":
+    g = ig.Graph(len(list), generateEdgesList(list))
+    g.vs['id'] = [i + 1 for i in range(len(list))]
+  elif inputType == "EL":
+    g = ig.Graph(len(list), list)
+    g.vs['id'] = [i + 1 for i in range(len(list))]
   _, ax = plt.subplots()
   ig.plot(
     g,

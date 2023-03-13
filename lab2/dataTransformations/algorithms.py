@@ -1,5 +1,5 @@
 import numpy as np
-from utils import sortList, sortDict
+from utils import sortList, sortDict, generateEdgesList
 
 
 def degree_seq(A, verbose=False):
@@ -44,3 +44,34 @@ def constructNLFromSeq(A, verbose=False):
     sortDict(A, mode="desc")
     if verbose:
       print(A)
+
+
+def randomizeEdges(NL, number, verbose=False):
+  edges = generateEdgesList(NL)
+  numberOfEdges = len(edges)
+  i = 0
+  while i < number:
+    randAB = np.random.randint(0, numberOfEdges)
+    randCD = randAB
+    while randCD == randAB:
+      randCD = np.random.randint(0, numberOfEdges)
+
+    if verbose:
+      print(f'{edges[randAB]}, {edges[randCD]} => ', end="")
+
+    AB = list(edges[randAB])
+    CD = list(edges[randCD])
+    AB[0], AB[1], CD[0], CD[1] = AB[0], CD[1], AB[1], CD[0]
+
+    if tuple(AB) not in edges \
+            and tuple(CD) not in edges \
+            and AB[0] != AB[1] and CD[0] != CD[1]:  # check if it is not multiedge or loop
+      edges[randAB], edges[randCD] = tuple(AB), tuple(CD)
+      if verbose:
+        print(f'{edges[randAB]}, {edges[randCD]}')
+    else:
+      print("Skip..")
+      i -= 1
+    i += 1
+
+  return edges
