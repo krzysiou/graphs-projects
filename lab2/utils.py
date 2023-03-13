@@ -59,3 +59,8 @@ def sortDict(A, mode="asc"):
     A.items(), reverse=reverse, key=lambda item: item[1])}
   A.clear()
   A.update(B)
+
+
+def isEdgeExists(edge, listOfEdges):
+  reversed = edge[::-1]
+  return tuple(edge) in listOfEdges or tuple(reversed) in listOfEdges
