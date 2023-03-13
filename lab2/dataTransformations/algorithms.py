@@ -49,6 +49,8 @@ def constructNLFromSeq(A, verbose=False):
 def randomizeEdges(NL, number, verbose=False):
   edges = generateEdgesList(NL)
   numberOfEdges = len(edges)
+  if numberOfEdges == 0:
+    return edges
   i = 0
   while i < number:
     randAB = np.random.randint(0, numberOfEdges)
