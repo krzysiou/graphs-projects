@@ -6,9 +6,9 @@ from dataTransformations.displayData import *
 from utils import *
 
 
-def main(mode, file_name):
+def main(mode, context):
     if mode == "NM":
-        neighbourMatrix = readMatrix(file_name)
+        neighbourMatrix = readMatrix(context)
         incidentMatrix, neighbourList = convertNeighbourMatrix(neighbourMatrix)
 
         displayMatrix(incidentMatrix)
@@ -17,7 +17,7 @@ def main(mode, file_name):
         drawGraph(neighbourList)
 
     elif mode == "IN":
-        incidentMatrix = readMatrix(file_name)
+        incidentMatrix = readMatrix(context)
         neighbourList, neighbourMatrix = convertIncidentMatrix(incidentMatrix)
 
         displayMatrix(neighbourMatrix)
@@ -26,13 +26,20 @@ def main(mode, file_name):
         drawGraph(neighbourList)
 
     elif mode == "NL":
-        neighbourList = readList(file_name)
+        neighbourList = readList(context)
         neighbourMatrix, incidentMatrix = convertNeighbourList(neighbourList)
 
         displayMatrix(neighbourMatrix)
         displayMatrix(incidentMatrix)
 
         drawGraph(neighbourList)
+
+    elif mode == "RAND":
+        neighbourList1 = generateGraphNL(20, 30)
+        neighbourList2 = generateGraphNP(5, 0.5)
+
+        drawGraph(neighbourList1)
+        drawGraph(neighbourList2)
 
     else:
         sys.exit("Please provide valide mode, [NM, IN, NL]")

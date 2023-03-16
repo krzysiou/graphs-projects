@@ -1,5 +1,7 @@
 import igraph as ig
 import matplotlib.pyplot as plt
+import sys
+import numpy as np
 
 
 def generateEdgesList(neighbourList):
@@ -45,3 +47,58 @@ def drawGraph(neighbourList):
     )
 
     plt.show()
+
+def convertEdgesToNeighbourList(edges):
+    maxList = map(max, edges)
+    
+    nodeNumber = max(maxList)
+    neighbourList = []
+
+    for _ in range(nodeNumber + 1):
+        neighbourList.append([])
+
+    for edge in edges:
+        neighbourList[edge[0]].append(edge[1] + 1)
+        neighbourList[edge[1]].append(edge[0] + 1)
+
+    print(neighbourList)
+
+    return neighbourList
+
+def generateGraphNL(n, l):
+    if l < 0 or l > n * (n - 1) / 2: 
+        sys.exit("Wrong randomization arguments")
+    
+    edges = []
+
+    for i in range(l):
+        while True:
+            rand1 = np.random.randint(0, n)
+            rand2 = rand1
+            
+            while rand1 == rand2:
+                rand2 = np.random.randint(0, n)
+            
+            edge = [rand1, rand2]
+            edge.sort()
+
+            if edge not in edges:
+                edges.append(edge)
+                break
+    
+    return convertEdgesToNeighbourList(edges)
+
+def generateGraphNP(n, probability):
+    if probability < 0 or probability > 1:
+        sys.exit("Wrong randomization arguments")
+    
+    edges = []
+
+    for i in range(n - 1):
+        for j in range(i + 1, n):
+            rand = np.random.rand()
+
+            if rand < probability:
+                edges.append([i, j])
+    
+    return convertEdgesToNeighbourList(edges)
