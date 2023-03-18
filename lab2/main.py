@@ -26,7 +26,7 @@ def main(mode, file_name):
         drawGraph(constructNLFromSeq(seqArray))
 
     else:
-        sys.exit("Please provide valide mode, [task1, task2]")
+        sys.exit("Please provide valide mode, [task1, task2, task3, task4, task5, task6]")
 
 
 if __name__ == "__main__":
@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     if len(programArguments) != 3:
         sys.exit(
-            "Please provide two arguments, first is the mode [task1, task2], second one is input file name."
+            "Please provide two arguments, first is the mode [[task1, task2, task3, task4, task5, task6], second one is input file name."
         )
 
     main(programArguments[1], programArguments[2])
