@@ -8,15 +8,26 @@ def generateEdgesList(neighbourList):
 
     for index, neighbours in enumerate(neighbourList):
         edges.extend(
-            (index, neighbour - 1) for neighbour in neighbours if neighbour - 1 < index
+            (index, neighbour) for neighbour in neighbours if neighbour < index
         )
 
     return edges
 
-def drawGraph(neighbourList, numOfEdges):
+def matrixOfZeros(sizeX, sizeY):
+    matrix = []
+
+    for _ in range(sizeX):
+        temp = []
+        for _ in range(sizeY):
+            temp.append(0)
+        matrix.append(temp)
+
+    return matrix
+
+def drawGraph(neighbourList, edgesValues):
     g = ig.Graph(len(neighbourList), generateEdgesList(neighbourList))
     g.vs["id"] = [i + 1 for i in range(len(neighbourList))]
-    g.es["value"] = [i + 1 for i in range(numOfEdges)]
+    g.es["value"] = [val for val in edgesValues]
 
     _, ax = plt.subplots()
     ig.plot(
@@ -33,6 +44,7 @@ def drawGraph(neighbourList, numOfEdges):
         edge_color="#000",
         edge_label=g.es["value"],
         edge_label_color = "#FF0000",
+        edge_label_size=16.0,
     )
 
     plt.show()
@@ -47,10 +59,8 @@ def convertEdgesToNeighbourList(edges):
         neighbourList.append([])
 
     for edge in edges:
-        neighbourList[edge[0]].append(edge[1] + 1)
-        neighbourList[edge[1]].append(edge[0] + 1)
-
-    # print(neighbourList)
+        neighbourList[edge[0]].append(edge[1])
+        neighbourList[edge[1]].append(edge[0])
 
     return neighbourList
 
@@ -68,13 +78,14 @@ def generateGraphNL(n, l):
             while rand1 == rand2:
                 rand2 = np.random.randint(0, n)
             
-            edge = [rand1, rand2]
-            edge.sort()
+            temp = [rand1, rand2]
+            temp.sort(reverse=True)
+            edge = (temp[0], temp[1])
 
             if edge not in edges:
                 edges.append(edge)
                 break
-
+    edges.sort()
     return convertEdgesToNeighbourList(edges)
 
 def generateConnectedGraph(n, l):
