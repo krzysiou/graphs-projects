@@ -31,8 +31,6 @@ def minDistance(d, S):
             minIndex = i
     return minIndex
 
-def printSolution(d):
-    print("Vertex \t Distance from Source")
 
 def getPath(start, end, p):
     if start == end:
@@ -46,8 +44,15 @@ def getPath(start, end, p):
     path.reverse()
     return path
 
+
+def printSolution(d, p, start):
+    print(p)
+    print(f'START: s = {start+1}')
     for node in range(len(d)):
-        print(node + 1, "\t\t", d[node])
+        print(f'd({node+1}) = {d[node]} ==> [', end='')
+        print(' - '.join(map(str, getPath(start, node, p))), end='')
+        print("]")
+
 
 def dijkstra(neighbourList, edgesValues, s):
     neighbourMatrix = convertToNeighbourMatrix(neighbourList)
@@ -63,7 +68,7 @@ def dijkstra(neighbourList, edgesValues, s):
             if (neighbourMatrixWithValues[u][v] > 0 and S[v] == False
                     and d[v] > d[u] + neighbourMatrixWithValues[u][v]):
                 d[v] = d[u] + neighbourMatrixWithValues[u][v]
-    printSolution(d)    
+    printSolution(d, p, s)
 
 def convertToNeighbourMatrix(neighbourList):
     neighbourMatrix = matrixOfZeros(len(neighbourList), len(neighbourList))
