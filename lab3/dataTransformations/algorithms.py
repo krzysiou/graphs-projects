@@ -68,6 +68,7 @@ def dijkstra(neighbourList, edgesValues, s):
             if (neighbourMatrixWithValues[u][v] > 0 and S[v] == False
                     and d[v] > d[u] + neighbourMatrixWithValues[u][v]):
                 d[v] = d[u] + neighbourMatrixWithValues[u][v]
+                p[v] = u
     printSolution(d, p, s)
 
 def convertToNeighbourMatrix(neighbourList):
