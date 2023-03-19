@@ -33,6 +33,19 @@ def minDistance(d, S):
 
 def printSolution(d):
     print("Vertex \t Distance from Source")
+
+def getPath(start, end, p):
+    if start == end:
+        return [start + 1]
+    path = [end + 1]
+    step = p[end]
+    while step != start:
+        path.append(step + 1)
+        step = p[step]
+    path.append(start + 1)
+    path.reverse()
+    return path
+
     for node in range(len(d)):
         print(node + 1, "\t\t", d[node])
 
