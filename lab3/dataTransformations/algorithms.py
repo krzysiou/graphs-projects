@@ -81,4 +81,10 @@ def convertToNeighbourMatrix(neighbourList):
                 neighbourMatrix[i][int(neighbourList[i][j])] = 1
                 neighbourMatrix[int(neighbourList[i][j])][i] = 1
 
-    return neighbourMatrix
+    return neighbourMatrix    return neighbourMatrix
+def lengthMatrix(neighbourList, edgesValues):
+    matrix = matrixOfZeros(len(neighbourList), len(neighbourList))
+    for startNode in range(len(neighbourList)):
+        d, _ = dijkstra(neighbourList, edgesValues, startNode)
+        matrix[startNode] = d
+    return matrix
