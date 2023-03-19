@@ -93,4 +93,6 @@ def generateConnectedGraph(n, l):
     while not isConnected:
         neighbourList = generateGraphNL(n, l)
         isConnected = False if min([len(neighbourList[i]) for i in range(len(neighbourList))]) == 0 else True
-    return neighbourList
+    return neighbourListdef printMatrix(a):
+    for _, val in enumerate(a):
+        print('  '.join(map(str, val)))
