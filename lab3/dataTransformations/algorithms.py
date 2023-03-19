@@ -69,7 +69,8 @@ def dijkstra(neighbourList, edgesValues, s):
                     and d[v] > d[u] + neighbourMatrixWithValues[u][v]):
                 d[v] = d[u] + neighbourMatrixWithValues[u][v]
                 p[v] = u
-    printSolution(d, p, s)
+    return [d, p]
+
 
 def convertToNeighbourMatrix(neighbourList):
     neighbourMatrix = matrixOfZeros(len(neighbourList), len(neighbourList))
