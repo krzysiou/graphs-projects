@@ -35,7 +35,7 @@ def main(mode, file_name):
         print(eulerCycle)
 
         drawGraphV2(eulerNeighbourList)
-    
+
     elif mode == "task5":
         regularNeighbourList = generateRegularGraph(7, 2)
 
