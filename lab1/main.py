@@ -35,7 +35,7 @@ def main(mode, context):
         drawGraph(neighbourList)
 
     elif mode == "RAND":
-        neighbourList1 = generateGraphNL(20, 30)
+        neighbourList1 = generateGraphNL(5, 6)
         neighbourList2 = generateGraphNP(5, 0.5)
 
         drawGraph(neighbourList1)
