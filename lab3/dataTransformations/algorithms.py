@@ -51,10 +51,10 @@ def getPath(start, end, p):
 
 def printSolution(d, p, start):
     print(p)
-    print(f'START: s = {start+1}')
+    print(f"START: s = {start+1}")
     for node in range(len(d)):
-        print(f'd({node+1}) = {d[node]} ==> [', end='')
-        print(' - '.join(map(str, getPath(start, node, p))), end='')
+        print(f"d({node+1}) = {d[node]} ==> [", end="")
+        print(" - ".join(map(str, getPath(start, node, p))), end="")
         print("]")
 
 
@@ -62,7 +62,8 @@ def dijkstra(neighbourList, edgesValues, s):
     neighbourMatrix = convertToNeighbourMatrix(neighbourList)
     edges = generateEdgesList(neighbourList)
     neighbourMatrixWithValues = updateMatrixWithValues(
-        neighbourMatrix, edges, edgesValues)
+        neighbourMatrix, edges, edgesValues
+    )
     d, p = initializeAtributes(len(neighbourList), s)
     S = [False for _ in range(len(neighbourList))]
 
@@ -70,12 +71,16 @@ def dijkstra(neighbourList, edgesValues, s):
         u = minDistance(d, S)
         S[u] = True
         for v in range(len(d)):
-            if (neighbourMatrixWithValues[u][v] > 0 and S[v] == False
-                    and d[v] > d[u] + neighbourMatrixWithValues[u][v]):
+            if (
+                neighbourMatrixWithValues[u][v] > 0
+                and S[v] == False
+                and d[v] > d[u] + neighbourMatrixWithValues[u][v]
+            ):
                 d[v] = d[u] + neighbourMatrixWithValues[u][v]
                 p[v] = u
 
     return [d, p]
+
 
 def convertToNeighbourMatrix(neighbourList):
     neighbourMatrix = matrixOfZeros(len(neighbourList), len(neighbourList))
