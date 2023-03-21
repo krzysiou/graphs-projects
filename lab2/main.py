@@ -48,7 +48,8 @@ def main(mode, file_name):
 
 
 if __name__ == "__main__":
-    programArguments = sys.argv
+    programArguments = sys.argvqweqwe
+    
 
     if len(programArguments) != 3:
         sys.exit(
