@@ -54,14 +54,12 @@ def convertEdgesToNeighbourList(edges):
     nodeNumber = max(maxList)
     neighbourList = []
 
-    for _ in range(nodeNumber + 1):
+    for _ in range(nodeNumber):
         neighbourList.append([])
 
     for edge in edges:
-        neighbourList[edge[0]].append(edge[1] + 1)
-        neighbourList[edge[1]].append(edge[0] + 1)
-
-    print(neighbourList)
+        neighbourList[edge[0] - 1].append(edge[1])
+        neighbourList[edge[1] - 1].append(edge[0])
 
     return neighbourList
 
@@ -73,11 +71,11 @@ def generateGraphNL(n, l):
 
     for i in range(l):
         while True:
-            rand1 = np.random.randint(0, n)
+            rand1 = np.random.randint(1, n + 1)
             rand2 = rand1
             
             while rand1 == rand2:
-                rand2 = np.random.randint(0, n)
+                rand2 = np.random.randint(1, n + 1)
             
             edge = [rand1, rand2]
             edge.sort()
@@ -94,8 +92,8 @@ def generateGraphNP(n, probability):
     
     edges = []
 
-    for i in range(n - 1):
-        for j in range(i + 1, n):
+    for i in range(1, n + 1):
+        for j in range(i + 1, n + 1):
             rand = np.random.rand()
 
             if rand < probability:

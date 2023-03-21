@@ -74,6 +74,7 @@ def dijkstra(neighbourList, edgesValues, s):
                     and d[v] > d[u] + neighbourMatrixWithValues[u][v]):
                 d[v] = d[u] + neighbourMatrixWithValues[u][v]
                 p[v] = u
+
     return [d, p]
 
 
