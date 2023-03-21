@@ -3,6 +3,7 @@ import numpy as np
 import sys
 from utils import *
 
+
 def initializeAtributes(graphLength, s):
     ds = []
     ps = []
@@ -12,16 +13,19 @@ def initializeAtributes(graphLength, s):
     ds[s] = 0
     return ds, ps
 
+
 def relax(u, v, w):
     print()
+
 
 def updateMatrixWithValues(neighbourMatrix, edges, edgesValues):
     neighbourMatrixWithValues = copy.deepcopy(neighbourMatrix)
     for i, edge in enumerate(edges):
         neighbourMatrixWithValues[edge[0]][edge[1]] = edgesValues[i]
-        neighbourMatrixWithValues[edge[1]][edge[0]] = edgesValues[i] 
+        neighbourMatrixWithValues[edge[1]][edge[0]] = edgesValues[i]
 
-    return neighbourMatrixWithValues 
+    return neighbourMatrixWithValues
+
 
 def minDistance(d, S):
     minDist = sys.maxsize
@@ -57,7 +61,8 @@ def printSolution(d, p, start):
 def dijkstra(neighbourList, edgesValues, s):
     neighbourMatrix = convertToNeighbourMatrix(neighbourList)
     edges = generateEdgesList(neighbourList)
-    neighbourMatrixWithValues = updateMatrixWithValues(neighbourMatrix, edges, edgesValues)
+    neighbourMatrixWithValues = updateMatrixWithValues(
+        neighbourMatrix, edges, edgesValues)
     d, p = initializeAtributes(len(neighbourList), s)
     S = [False for _ in range(len(neighbourList))]
 
@@ -69,7 +74,8 @@ def dijkstra(neighbourList, edgesValues, s):
                     and d[v] > d[u] + neighbourMatrixWithValues[u][v]):
                 d[v] = d[u] + neighbourMatrixWithValues[u][v]
                 p[v] = u
-    printSolution(d, p, s)
+
+    return [d, p]
 
 def convertToNeighbourMatrix(neighbourList):
     neighbourMatrix = matrixOfZeros(len(neighbourList), len(neighbourList))
@@ -81,3 +87,11 @@ def convertToNeighbourMatrix(neighbourList):
                 neighbourMatrix[int(neighbourList[i][j])][i] = 1
 
     return neighbourMatrix
+
+
+def lengthMatrix(neighbourList, edgesValues):
+    matrix = matrixOfZeros(len(neighbourList), len(neighbourList))
+    for startNode in range(len(neighbourList)):
+        d, _ = dijkstra(neighbourList, edgesValues, startNode)
+        matrix[startNode] = d
+    return matrix

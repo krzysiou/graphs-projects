@@ -14,12 +14,20 @@ def main(mode, num):
         drawGraph(neighbourList, edgesValues)
     elif mode == "task2":
         neighbourList = generateConnectedGraph(5, 8)
-        edgesValues = [np.random.randint(1, 10) for _ in range(len(generateEdgesList(neighbourList)))]
-        dijkstra(neighbourList, edgesValues, num - 1)
+        edgesValues = [np.random.randint(1, 10) for _ in range(
+            len(generateEdgesList(neighbourList)))]
+        d, p = dijkstra(neighbourList, edgesValues, num - 1)
+        printSolution(d, p, num - 1)
+        drawGraph(neighbourList, edgesValues)
+    elif mode == "task3":
+        neighbourList = generateConnectedGraph(5, 6)
+        edgesValues = [np.random.randint(1, 10) for _ in range(
+            len(generateEdgesList(neighbourList)))]
+        printMatrix(lengthMatrix(neighbourList, edgesValues))
         drawGraph(neighbourList, edgesValues)
 
     else:
-        sys.exit("Please provide valide mode, [task1, task2]")
+        sys.exit("Please provide valide mode, [task1, task2, task3]")
 
 
 if __name__ == "__main__":
