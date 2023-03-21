@@ -260,6 +260,7 @@ def findEulerCycle(eulerNeighbourList):
 
     return eulerCycle
 
+
 def generateGraphNP(n, probability):
     if probability < 0 or probability > 1:
         sys.exit("Wrong randomization arguments")
@@ -278,12 +279,13 @@ def generateGraphNP(n, probability):
             if max(map(max, edges)) == n:
                 return convertEdgesToNeighbourList(edges)
 
+
 def generateRegularGraph(nodes, level):
     if level >= nodes or (level % 2 == 1 and not nodes % 2 == 0):
         sys.exit("Wrong randomization arguments")
 
     while True:
-        neighbourList = generateGraphNP(nodes, level/nodes)
+        neighbourList = generateGraphNP(nodes, level / nodes)
         sequence = [len(neighbourList[i]) for i in range(len(neighbourList))]
 
         if all(sequence[i] == level for i in range(len(sequence))):
