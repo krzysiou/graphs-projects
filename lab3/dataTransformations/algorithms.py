@@ -100,3 +100,15 @@ def lengthMatrix(neighbourList, edgesValues):
         d, _ = dijkstra(neighbourList, edgesValues, startNode)
         matrix[startNode] = d
     return matrix
+
+
+def graphCenter(neighbourList, edgesValues):
+    lMatrix = lengthMatrix(neighbourList, edgesValues)
+    maxLen, maxIdx = -1, -1
+    for idx, row in enumerate(lMatrix):
+        print(sum(row))
+        if maxLen < sum(row):
+            maxLen = sum(row)
+            maxIdx = idx
+
+    return maxLen, maxIdx
