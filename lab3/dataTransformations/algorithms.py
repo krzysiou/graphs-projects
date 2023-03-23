@@ -104,11 +104,11 @@ def lengthMatrix(neighbourList, edgesValues):
 
 def graphCenter(neighbourList, edgesValues):
     lMatrix = lengthMatrix(neighbourList, edgesValues)
-    maxLen, maxIdx = -1, -1
+    maxLenSum, maxSumIdx = -1, -1
     for idx, row in enumerate(lMatrix):
-        print(sum(row))
-        if maxLen < sum(row):
-            maxLen = sum(row)
-            maxIdx = idx
+        if maxLenSum < sum(row):
+            maxLenSum = sum(row)
+            maxSumIdx = idx
 
-    return maxLen, maxIdx
+    return maxLenSum, maxSumIdx
+
