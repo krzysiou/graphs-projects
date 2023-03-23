@@ -115,7 +115,6 @@ def graphCenter(neighbourList, edgesValues):
 
 def miniMaxGraphCenter(neighbourList, edgesValues):
     lMatrix = lengthMatrix(neighbourList, edgesValues)
-    print(lMatrix)
     minLen, minIdx = max(lMatrix[0]), 0
     for idx, row in enumerate(lMatrix):
         if minLen < max(row):
