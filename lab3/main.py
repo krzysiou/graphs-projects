@@ -10,19 +10,26 @@ def main(mode, num):
     num = int(num)
     if mode == "task1":
         neighbourList = generateConnectedGraph(5, 6)
-        edgesValues = [np.random.randint(1, num) for _ in range(len(generateEdgesList(neighbourList)))]
+        edgesValues = [
+            np.random.randint(1, num)
+            for _ in range(len(generateEdgesList(neighbourList)))
+        ]
         drawGraph(neighbourList, edgesValues)
     elif mode == "task2":
         neighbourList = generateConnectedGraph(5, 8)
-        edgesValues = [np.random.randint(1, 10) for _ in range(
-            len(generateEdgesList(neighbourList)))]
+        edgesValues = [
+            np.random.randint(1, 10)
+            for _ in range(len(generateEdgesList(neighbourList)))
+        ]
         d, p = dijkstra(neighbourList, edgesValues, num - 1)
         printSolution(d, p, num - 1)
         drawGraph(neighbourList, edgesValues)
     elif mode == "task3":
         neighbourList = generateConnectedGraph(5, 6)
-        edgesValues = [np.random.randint(1, 10) for _ in range(
-            len(generateEdgesList(neighbourList)))]
+        edgesValues = [
+            np.random.randint(1, 10)
+            for _ in range(len(generateEdgesList(neighbourList)))
+        ]
         printMatrix(lengthMatrix(neighbourList, edgesValues))
         drawGraph(neighbourList, edgesValues)
 
