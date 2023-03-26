@@ -15,6 +15,17 @@ def generateEdgesList(neighbourList):
     return edges
 
 
+def generateEdgesListFromDict(Graphdict):
+    edges = []
+    print(Graphdict)
+    for index, (k, v) in enumerate(Graphdict.items()):
+        for neighbourVertexIdx, neighbour in enumerate(v):
+            if neighbour != 0 and neighbourVertexIdx < k:
+                edges.append((k, neighbourVertexIdx))
+    print(edges)
+    return edges
+
+
 def matrixOfZeros(sizeX, sizeY):
     matrix = []
 
