@@ -46,9 +46,17 @@ def main(mode, num):
         print(
             f"Centrum minimax = {miniMaxCentIdx + 1} (odległość od najdalszego: {miniMaxCentLen})"
         )
+    elif mode == "task5":
+        neighbourList = generateConnectedGraph(6, 12)
+        edgesValues = [
+            np.random.randint(1, 10)
+            for _ in range(len(generateEdgesList(neighbourList)))
+        ]
+        T = minimalSpanningTree(neighbourList, edgesValues)
+        drawSpanningTree(T)
 
     else:
-        sys.exit("Please provide valide mode, [task1, task2, task3, task4]")
+        sys.exit("Please provide valide mode, [task1, task2, task3, task4, task5]")
 
 
 if __name__ == "__main__":
