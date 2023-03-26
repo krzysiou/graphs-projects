@@ -136,3 +136,32 @@ def minEdge(T, W):
                 vertexIdx = k
     return vertexIdx, minVal, minIdx
 
+
+def minimalSpanningTree(neighbourList, edgesValues, verbose=False):
+    neighbourMatrix = convertToNeighbourMatrix(neighbourList)
+    edges = generateEdgesList(neighbourList)
+    neighbourMatrixWithValues = updateMatrixWithValues(
+        neighbourMatrix, edges, edgesValues
+    )
+    print(neighbourMatrixWithValues)
+
+    T = {}
+    T[0] = neighbourMatrixWithValues[0]
+    W = {}
+    for i in range(1, len(neighbourMatrixWithValues)):
+        W[i] = neighbourMatrixWithValues[i]
+    if verbose:
+        print("Begin T", T)
+        print("Begin W", W)
+
+    while len(T) != len(neighbourMatrixWithValues):
+        startVertexIdx, minEdgeLen, endVertexIdx = minEdge(T, W)
+        if verbose:
+            print(minEdge(T, W))
+        T[startVertexIdx][endVertexIdx] = -minEdgeLen
+        W[endVertexIdx][startVertexIdx] = -minEdgeLen
+        T[endVertexIdx] = W[endVertexIdx]
+        del W[endVertexIdx]
+        if verbose:
+            print(T, W)
+    return T
