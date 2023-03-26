@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 import sys
 import numpy as np
 
+GRAY_COLOR = "#A9A9A9"
+BLUE_COLOR = "#1414ff"
+
 
 def generateEdgesList(neighbourList):
     edges = []
@@ -51,7 +54,7 @@ def drawGraph(neighbourList, edgesValues):
         vertex_size=0.25,
         vertex_color="#d9d9ff",
         vertex_frame_width=1.0,
-        vertex_frame_color="#1414ff",
+        vertex_frame_color=BLUE_COLOR,
         vertex_label_size=16.0,
         vertex_label=g.vs["id"],
         edge_width=2,
