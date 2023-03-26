@@ -143,7 +143,6 @@ def minimalSpanningTree(neighbourList, edgesValues, verbose=False):
     neighbourMatrixWithValues = updateMatrixWithValues(
         neighbourMatrix, edges, edgesValues
     )
-    print(neighbourMatrixWithValues)
 
     T = {}
     T[0] = neighbourMatrixWithValues[0]
