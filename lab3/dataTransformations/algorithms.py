@@ -2,6 +2,7 @@ import copy
 import numpy as np
 import sys
 from utils import *
+import itertools
 
 
 def initializeAtributes(graphLength, s):
@@ -122,3 +123,16 @@ def miniMaxGraphCenter(neighbourList, edgesValues):
             minIdx = idx
 
     return minLen, minIdx
+
+
+def minEdge(T, W):
+    minVal, minIdx, vertexIdx = max(itertools.chain(*T.values())), 0, 0
+    WVertices = list(W)
+    for idx, (k, v) in enumerate(T.items()):
+        for i in WVertices:
+            if (v[i] <= minVal) and v[i] > 0:
+                minVal = v[i]
+                minIdx = i
+                vertexIdx = k
+    return vertexIdx, minVal, minIdx
+
