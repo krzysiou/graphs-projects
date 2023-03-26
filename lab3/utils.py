@@ -73,6 +73,35 @@ def drawGraph(neighbourList, edgesValues):
     plt.show()
 
 
+def drawSpanningTree(graphDict):
+    edges, values = generateEdgesListFromDict(graphDict)
+    g = ig.Graph(len(graphDict), edges)
+    g.vs["id"] = list(graphDict.keys())
+    g.es["value"] = [abs(val) for val in values]
+    g.es["label_color"] = [GRAY_COLOR if val > 0 else BLUE_COLOR for val in values]
+    g.es["color"] = [GRAY_COLOR if val > 0 else BLUE_COLOR for val in values]
+
+    _, ax = plt.subplots()
+    ig.plot(
+        g,
+        target=ax,
+        layout="circle",
+        vertex_size=0.25,
+        vertex_color="#d9d9ff",
+        vertex_frame_width=1.0,
+        vertex_frame_color=BLUE_COLOR,
+        vertex_label_size=16.0,
+        vertex_label=g.vs["id"],
+        edge_width=2,
+        edge_color=g.es["color"],
+        edge_label=g.es["value"],
+        edge_label_color=g.es["label_color"],
+        edge_label_size=16.0,
+    )
+
+    plt.show()
+
+
 def convertEdgesToNeighbourList(edges):
     maxList = map(max, edges)
 
