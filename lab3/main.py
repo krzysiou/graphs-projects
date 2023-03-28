@@ -32,9 +32,32 @@ def main(mode, num):
         ]
         printMatrix(lengthMatrix(neighbourList, edgesValues))
         drawGraph(neighbourList, edgesValues)
+    elif mode == "task4":
+        neighbourList = generateConnectedGraph(5, 6)
+        edgesValues = [
+            np.random.randint(1, 10)
+            for _ in range(len(generateEdgesList(neighbourList)))
+        ]
+        centLen, centIdx = graphCenter(neighbourList, edgesValues)
+        miniMaxCentLen, miniMaxCentIdx = miniMaxGraphCenter(neighbourList, edgesValues)
+
+        printMatrix(lengthMatrix(neighbourList, edgesValues))
+        print(f"Centrum = {centIdx + 1} (suma odległości: {centLen})")
+        print(
+            f"Centrum minimax = {miniMaxCentIdx + 1} (odległość od najdalszego: {miniMaxCentLen})"
+        )
+    elif mode == "task5":
+        neighbourList = generateConnectedGraph(6, 12)
+        edgesValues = [
+            np.random.randint(1, 10)
+            for _ in range(len(generateEdgesList(neighbourList)))
+        ]
+        T = minimalSpanningTree(neighbourList, edgesValues)
+        drawSpanningTree(T)
 
     else:
-        sys.exit("Please provide valide mode, [task1, task2, task3]")
+        sys.exit("Please provide valide mode, [task1, task2, task3, task4, task5]")
+
 
 
 if __name__ == "__main__":

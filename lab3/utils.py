@@ -3,6 +3,9 @@ import matplotlib.pyplot as plt
 import sys
 import numpy as np
 
+GRAY_COLOR = "#A9A9A9"
+BLUE_COLOR = "#1414ff"
+
 
 def generateEdgesList(neighbourList):
     edges = []
@@ -13,6 +16,23 @@ def generateEdgesList(neighbourList):
         )
 
     return edges
+
+
+def generateEdgesListFromDict(graphdict):
+    edges = []
+    values = []
+
+    for _, (k, v) in enumerate(graphdict.items()):
+        for neighbourVertexIdx, neighbour in enumerate(v):
+            if neighbour != 0 and neighbourVertexIdx < k:
+                edges.append((k, neighbourVertexIdx))
+                values.append(neighbour)
+
+    return edges, values
+
+
+def generateEdgesValuseFromDict(graphdict):
+    values = []
 
 
 def matrixOfZeros(sizeX, sizeY):
@@ -40,13 +60,42 @@ def drawGraph(neighbourList, edgesValues):
         vertex_size=0.25,
         vertex_color="#d9d9ff",
         vertex_frame_width=1.0,
-        vertex_frame_color="#1414ff",
+        vertex_frame_color=BLUE_COLOR,
         vertex_label_size=16.0,
         vertex_label=g.vs["id"],
         edge_width=2,
         edge_color="#000",
         edge_label=g.es["value"],
         edge_label_color="#FF0000",
+        edge_label_size=16.0,
+    )
+
+    plt.show()
+
+
+def drawSpanningTree(graphDict):
+    edges, values = generateEdgesListFromDict(graphDict)
+    g = ig.Graph(len(graphDict), edges)
+    g.vs["id"] = list(graphDict.keys())
+    g.es["value"] = [abs(val) for val in values]
+    g.es["label_color"] = [GRAY_COLOR if val > 0 else BLUE_COLOR for val in values]
+    g.es["color"] = [GRAY_COLOR if val > 0 else BLUE_COLOR for val in values]
+
+    _, ax = plt.subplots()
+    ig.plot(
+        g,
+        target=ax,
+        layout="circle",
+        vertex_size=0.25,
+        vertex_color="#d9d9ff",
+        vertex_frame_width=1.0,
+        vertex_frame_color=BLUE_COLOR,
+        vertex_label_size=16.0,
+        vertex_label=g.vs["id"],
+        edge_width=2,
+        edge_color=g.es["color"],
+        edge_label=g.es["value"],
+        edge_label_color=g.es["label_color"],
         edge_label_size=16.0,
     )
 
