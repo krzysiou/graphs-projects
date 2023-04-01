@@ -1,9 +1,13 @@
 import sys
 
+from utils import *
+from dataTransformations.algorithms import *
+
 
 def main(mode, input_file):
     if mode == "task1":
-        print(1)
+        edgesList = generateDigraph(5, 0.3)
+        drawGraph(edgesList)
 
     else:
         sys.exit("Please provide valide mode, [task1, task2, task3, task4, task5]")
