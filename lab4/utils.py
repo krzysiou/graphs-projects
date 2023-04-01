@@ -25,3 +25,17 @@ def drawGraph(edgesList):
     )
 
     plt.show()
+
+
+def convertEdgesToNeighbourList(edges):
+    maxList = map(max, edges)
+    node_count = max(maxList)
+    neighbourList = []
+
+    for _ in range(node_count + 1):
+        neighbourList.append([])
+
+    for edge in edges:
+        neighbourList[edge[0]].append(edge[1])
+
+    return neighbourList
