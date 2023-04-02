@@ -59,7 +59,6 @@ def main(mode, num):
         sys.exit("Please provide valide mode, [task1, task2, task3, task4, task5]")
 
 
-
 if __name__ == "__main__":
     programArguments = sys.argv
 

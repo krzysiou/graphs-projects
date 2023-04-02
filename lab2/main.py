@@ -50,7 +50,6 @@ def main(mode, file_name):
 if __name__ == "__main__":
     programArguments = sys.argv
 
-
     if len(programArguments) != 3:
         sys.exit(
             "Please provide two arguments, first is the mode [[task1, task2, task3, task4, task5, task6], second one is input file name."
