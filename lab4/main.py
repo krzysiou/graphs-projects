@@ -17,8 +17,9 @@ def main(mode, input_file):
         drawGraph(edges_list)
 
     elif mode == "task3":
+        nodesCount = 5
         while True:
-            edges_list = generateDigraph(5, 0.4)
+            edges_list = generateDigraph(nodesCount, 0.2)
             result = kosaraju(edges_list)
             if len(set(result)) == 1:
                 break
