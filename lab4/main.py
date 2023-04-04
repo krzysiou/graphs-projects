@@ -16,6 +16,16 @@ def main(mode, input_file):
         print(result)
         drawGraph(edges_list)
 
+    elif mode == "task3":
+        while True:
+            edges_list = generateDigraph(5, 0.4)
+            result = kosaraju(edges_list)
+            if len(set(result)) == 1:
+                break
+
+        print(result)
+        drawGraph(edges_list)
+
     else:
         sys.exit("Please provide valide mode, [task1, task2, task3, task4, task5]")
 
