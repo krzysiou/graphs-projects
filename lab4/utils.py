@@ -65,3 +65,8 @@ def convertEdgesToNeighbourList(edges):
         neighbourList[edge[0]].append(edge[1])
 
     return neighbourList
+
+
+def printMatrix(a):
+    for _, val in enumerate(a):
+        print("  ".join(map(str, val)))
