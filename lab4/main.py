@@ -23,8 +23,9 @@ def main(mode, input_file):
             if len(set(result)) == 1:
                 break
 
-        print(result)
-        drawGraph(edges_list)
+        edgesValues = [np.random.randint(-5, 10) for _ in range(len(edges_list))]
+
+        drawGraphWithValues(edges_list, edgesValues)
 
     else:
         sys.exit("Please provide valide mode, [task1, task2, task3, task4, task5]")
