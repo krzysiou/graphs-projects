@@ -21,7 +21,7 @@ def generateDigraph(node_count, probability):
                         edges.append([i, j])
 
         maxList = map(max, edges)
-        maxNode = max(maxList)
+        maxNode = max(maxList, default=-1)
 
         if maxNode == node_count - 1:
             break
