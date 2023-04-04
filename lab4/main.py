@@ -9,7 +9,7 @@ def main(mode, input_file):
         edgesList = generateDigraph(5, 0.3)
         drawGraph(edgesList)
 
-    if mode == "task2":
+    elif mode == "task2":
         edges_list = generateDigraph(5, 0.4)
         result = kosaraju(edges_list)
 
