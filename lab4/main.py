@@ -26,6 +26,14 @@ def main(mode, input_file):
 
         edgesValues = [np.random.randint(-5, 10) for _ in range(len(edges_list))]
 
+        lenMatrix = []
+        for i in range(nodesCount):
+            res = bellman_ford(edges_list, edgesValues, i)
+            if res:
+                lenMatrix.append(res[:nodesCount])
+            else:
+                break
+        printMatrix(lenMatrix)
         drawGraphWithValues(edges_list, edgesValues)
 
     else:
