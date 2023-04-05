@@ -21,7 +21,7 @@ def generateDigraph(node_count, probability):
                         edges.append([i, j])
 
         maxList = map(max, edges)
-        maxNode = max(maxList)
+        maxNode = max(maxList, default=-1)
 
         if maxNode == node_count - 1:
             break
@@ -103,3 +103,21 @@ def components_r(nr, v, reverse_neighbour_list, comp):
         if comp[u] == -1:
             comp[u] = nr
             components_r(nr, u, reverse_neighbour_list, comp)
+
+
+def bellman_ford(edges_list, edgesValues, s):
+    edgesLen = len(edges_list)
+    distance = [np.inf for _ in range(edgesLen)]
+    distance[s] = 0
+
+    for _ in range(edgesLen - 1):
+        for i in range(len(edges_list)):
+            if distance[edges_list[i][1]] > distance[edges_list[i][0]] + edgesValues[i]:
+                distance[edges_list[i][1]] = distance[edges_list[i][0]] + edgesValues[i]
+
+    for i in range(len(edges_list)):
+        if distance[edges_list[i][1]] > distance[edges_list[i][0]] + edgesValues[i]:
+            print("Graph contains negative cycle")
+            return False
+
+    return distance
