@@ -3,6 +3,7 @@ import numpy as np
 import copy
 
 from utils import *
+from .dijkstra import dijkstra
 
 
 def generateDigraph(node_count, probability):
@@ -121,3 +122,41 @@ def bellman_ford(edges_list, edgesValues, s):
             return False
 
     return distance
+
+
+def johnson(edges_list, edgesValues, nodesCount, verbose=False):
+    edgesLen = len(edges_list)
+
+    G_prim_edges, G_prim_edgesValues = add_s(edges_list, edgesValues, nodesCount)
+    if verbose:
+        drawGraphWithValues(G_prim_edges, G_prim_edgesValues)
+
+    if (d := bellman_ford(G_prim_edges, G_prim_edgesValues, nodesCount)) == False:
+        return False
+
+    h = copy.deepcopy(d)
+    w_prim = [
+        edgesValues[i] + h[edges_list[i][0]] - h[edges_list[i][1]]
+        for i in range(edgesLen)
+    ]
+
+    D = np.zeros((nodesCount, nodesCount), dtype="int")
+
+    neighbour_list = convertEdgesToNeighbourList(edges_list)
+    d_prim = [dijkstra(neighbour_list, w_prim, i)[0] for i in range(nodesCount)]
+
+    D = [
+        [d_prim[i][j] + h[j] - h[i] for j in range(nodesCount)]
+        for i in range(nodesCount)
+    ]
+
+    return D
+
+
+def add_s(edges_list, edgesValues, nodesCount):
+    edgesLen = len(edges_list)
+    G_prim = copy.deepcopy(edges_list)
+    G_prim_edgesValues = copy.deepcopy(edgesValues)
+    G_prim.extend([nodesCount, index] for index in range(nodesCount))
+    G_prim_edgesValues.extend([0 for _ in range(nodesCount)])
+    return G_prim, G_prim_edgesValues
