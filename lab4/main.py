@@ -36,6 +36,18 @@ def main(mode, input_file):
         printMatrix(lenMatrix)
         drawGraphWithValues(edges_list, edgesValues)
 
+    elif mode == "task4":
+        nodesCount = 5
+        while True:
+            edges_list = generateDigraph(nodesCount, 0.2)
+            result = kosaraju(edges_list)
+            if len(set(result)) == 1:
+                break
+
+        edgesValues = [np.random.randint(-1, 10) for _ in range(len(edges_list))]
+        if D := johnson(edges_list, edgesValues, nodesCount, verbose=True):
+            printMatrix(D)
+
     else:
         sys.exit("Please provide valide mode, [task1, task2, task3, task4, task5]")
 
