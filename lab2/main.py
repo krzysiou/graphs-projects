@@ -41,6 +41,13 @@ def main(mode, file_name):
 
         drawGraphV2(regularNeighbourList)
 
+    elif mode == "task6":
+        seqArray = readLine(file_name)
+        neighbourList = constructNLFromSeq(seqArray)
+
+        checkIfHamiltonian(neighbourList)
+        drawGraph(neighbourList)
+
     else:
         sys.exit(
             "Please provide valide mode, [task1, task2, task3, task4, task5, task6]"
