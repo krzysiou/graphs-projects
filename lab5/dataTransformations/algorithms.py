@@ -5,6 +5,9 @@ import random
 
 
 def generateFlowNetwork(N):
+    if N < 2:
+        sys.exit("N must be greater than 2")
+
     graphLayers = generateVerticesLayers(N)
     graphEdges = generateGraphEdges(graphLayers)
 
