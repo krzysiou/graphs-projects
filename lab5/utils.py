@@ -54,7 +54,6 @@ def drawGraphWithValues(edgesList, edgesValues):
 
 
 def drawFlowNetwork(edgesList, layers):
-    print(edgesList)
     node_count = (layers[len(layers) - 2][len(layers[len(layers) - 2]) - 1]) + 2
 
     g = ig.Graph(node_count, edgesList, directed=True)
