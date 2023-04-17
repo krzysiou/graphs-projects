@@ -35,15 +35,17 @@ def generateGraphEdges(graphLayers):
         currentLayerEdges = graphLayers[i]
         nextLayerEdges = graphLayers[i + 1]
 
+        currentLayercount = 0
         nextLayerCount = 0
-        for j in currentLayerEdges:
+        for _ in range(max(len(currentLayerEdges), len(nextLayerEdges))):
             randomEdge = [
-                j,
+                currentLayerEdges[currentLayercount % len(currentLayerEdges)],
                 nextLayerEdges[nextLayerCount % len(nextLayerEdges)],
             ]
             if randomEdge in edgesList:
                 continue
             nextLayerCount += 1
+            currentLayercount += 1
             edgesList.append(randomEdge)
 
     edgesList.extend([i, graphLayers[N - 1][0]] for i in graphLayers[N - 2])
