@@ -53,14 +53,14 @@ def drawGraphWithValues(edgesList, edgesValues):
     plt.show()
 
 
-def drawFlowNetwork(edgesList, layers):
-    node_count = (layers[len(layers) - 2][len(layers[len(layers) - 2]) - 1]) + 2
+def drawFlowNetwork(edgesList, layers, edgeValues):
+    nodeCount = (layers[len(layers) - 2][len(layers[len(layers) - 2]) - 1]) + 2
 
-    g = ig.Graph(node_count, edgesList, directed=True)
+    g = ig.Graph(nodeCount, edgesList, directed=True)
 
-    g.vs["id"] = ["s"] + [i + 1 for i in range(node_count - 2)] + ["t"]
+    g.vs["id"] = ["s"] + [i + 1 for i in range(nodeCount - 2)] + ["t"]
 
-    g.vs["frame width"] = [2.5] + [1.0] * (node_count - 2) + [2.5]
+    g.vs["frame width"] = [2.5] + [1.0] * (nodeCount - 2) + [2.5]
 
     _, ax = plt.subplots()
     ig.plot(
@@ -74,7 +74,10 @@ def drawFlowNetwork(edgesList, layers):
         vertex_label_size=16.0,
         vertex_label=g.vs["id"],
         edge_width=2,
-        edge_color="#000",
+        edge_color="rgba(0,0,0,0.3)",
+        edge_label=edgeValues,
+        edge_label_size=14,
+        edge_curved=0.1,
     )
 
     plt.show()
