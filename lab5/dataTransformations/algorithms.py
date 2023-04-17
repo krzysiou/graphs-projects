@@ -11,8 +11,9 @@ def generateFlowNetwork(N):
     graphLayers = generateVerticesLayers(N)
     graphEdges = generateGraphEdges(graphLayers)
     graphEdges = addRandomEdges(graphEdges, graphLayers)
+    edgeValues = generateEdgeValues(graphEdges)
 
-    return [graphLayers, graphEdges]
+    return [graphLayers, graphEdges, edgeValues]
 
 
 def generateVerticesLayers(N):
@@ -82,3 +83,8 @@ def addRandomEdges(graphEdges, graphLayers):
                 return edgesList
 
 
+def generateEdgeValues(edgesList):
+    edgeValues = []
+    for _ in range(len(edgesList)):
+        edgeValues.append(random.randint(1, 10))
+    return edgeValues
