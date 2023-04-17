@@ -4,19 +4,20 @@ from dataTransformations.algorithms import *
 from utils import *
 
 
-def main(mode):
+def main(mode, numberOfLayers=4):
     if mode == "task1":
-        [graphVertices, graphEdges] = generateFlowNetwork(3)
+        [graphLayers, graphEdges, edgeValues] = generateFlowNetwork(numberOfLayers)
+        drawFlowNetwork(graphEdges, graphLayers, edgeValues)
     else:
-        sys.exit("Please provide valide mode, [task1, task2, task3, task4, task5]")
+        sys.exit("Please provide valide mode, [task1, task2]")
 
 
 if __name__ == "__main__":
     programArguments = sys.argv
 
-    if len(programArguments) != 2:
+    if len(programArguments) != 3:
         sys.exit(
-            "Please provide two arguments, first is the mode [task1, task2, task3, task4, task5]"
+            "Please provide two arguments, first is the mode [task1, task2], second is the number of layers"
         )
 
-    main(programArguments[1])
+    main(programArguments[1], int(programArguments[2]))
