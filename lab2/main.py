@@ -21,12 +21,37 @@ def main(mode, file_name):
     elif mode == "task3":
         seqArray = readLine(file_name)
         neighbourList = constructNLFromSeq(seqArray)
-        maxIntegrityNumber = calculateMaxIntegrityNumber(seqArray, neighbourList)
-        print(f"Max integrity number: {maxIntegrityNumber}")
-        drawGraph(constructNLFromSeq(seqArray))
+
+        print(neighbourList)
+
+        comp = calculateIntegrityArray(seqArray, neighbourList)
+        print(f"Max integrity number: {max(comp)}")
+        drawGraph(neighbourList)
+
+    elif mode == "task4":
+        eulerNeighbourList = generateEulerGraph(5, 6)
+        eulerCycle = findEulerCycle(copy.deepcopy(eulerNeighbourList))
+
+        print(eulerCycle)
+
+        drawGraphV2(eulerNeighbourList)
+
+    elif mode == "task5":
+        regularNeighbourList = generateRegularGraph(7, 2)
+
+        drawGraphV2(regularNeighbourList)
+
+    elif mode == "task6":
+        seqArray = readLine(file_name)
+        neighbourList = constructNLFromSeq(seqArray)
+
+        checkIfHamiltonian(neighbourList)
+        drawGraph(neighbourList)
 
     else:
-        sys.exit("Please provide valide mode, [task1, task2, task3, task4, task5, task6]")
+        sys.exit(
+            "Please provide valide mode, [task1, task2, task3, task4, task5, task6]"
+        )
 
 
 if __name__ == "__main__":
