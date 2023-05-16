@@ -46,7 +46,6 @@ def matrixOfZeros(sizeX, sizeY):
 
     return matrix
 
-
 def drawGraph(neighbourList, edgesValues):
     g = ig.Graph(len(neighbourList), generateEdgesList(neighbourList))
     g.vs["id"] = [i + 1 for i in range(len(neighbourList))]
@@ -131,7 +130,6 @@ def generateGraphNL(n, l):
 
             while rand1 == rand2:
                 rand2 = np.random.randint(0, n)
-
             temp = [rand1, rand2]
             temp.sort(reverse=True)
             edge = (temp[0], temp[1])
