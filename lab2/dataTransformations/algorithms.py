@@ -108,7 +108,8 @@ def components(integrityNumber, index, neighbourList, comp):
     for i in neighbours:
         if comp[i] == -1:
             comp[i] = integrityNumber
-            componentsV2(integrityNumber, i, neighbourList, comp)
+            # componentsV2(integrityNumber, i, neighbourList, comp)
+            components(integrityNumber, i, neighbourList, comp)
 
 
 def calculateIntegrityArrayV2(sequence, neighbourList):
