@@ -3,26 +3,27 @@ import sys
 # from dataTransformations.readData import *
 from dataTransformations.algorithms import *
 from utils import *
-import copy
 
 
 def main(mode, num):
-    num = int(num)
     if mode == "task1":
+        print(num)
+        maxWeight = int(num)
         neighbourList = generateConnectedGraph(5, 6)
         edgesValues = [
-            np.random.randint(1, num)
+            np.random.randint(1, maxWeight)
             for _ in range(len(generateEdgesList(neighbourList)))
         ]
         drawGraph(neighbourList, edgesValues)
     elif mode == "task2":
+        startNode = int(num)
         neighbourList = generateConnectedGraph(5, 8)
         edgesValues = [
             np.random.randint(1, 10)
             for _ in range(len(generateEdgesList(neighbourList)))
         ]
-        d, p = dijkstra(neighbourList, edgesValues, num - 1)
-        printSolution(d, p, num - 1)
+        d, p = dijkstra(neighbourList, edgesValues, startNode - 1)
+        printSolution(d, p, startNode - 1)
         drawGraph(neighbourList, edgesValues)
     elif mode == "task3":
         neighbourList = generateConnectedGraph(5, 6)
@@ -62,9 +63,16 @@ def main(mode, num):
 if __name__ == "__main__":
     programArguments = sys.argv
 
-    if len(programArguments) != 3:
+    if len(programArguments) < 2 or (
+        (programArguments[1] == "task1" or programArguments[1] == "task2")
+        and len(programArguments) != 3
+    ):
         sys.exit(
-            "Please provide two arguments, first is the mode [task1, task2, task3, task4, task5], second one is input file name."
+            """Please provide two arguments, first is the mode [task1, task2, task3, task4, task5]
+              for [task1] second argument is max value of edge weight,
+              for [task2] second argument is index of starting vertex
+            """
         )
-
-    main(programArguments[1], programArguments[2])
+    main(
+        programArguments[1], programArguments[2] if len(programArguments) == 3 else None
+    )
