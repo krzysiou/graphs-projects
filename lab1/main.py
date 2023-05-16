@@ -42,7 +42,7 @@ def main(mode, context=None):
         drawGraph(neighbourList2)
 
     else:
-        sys.exit("Please provide valide mode, [NM, IM, NL]")
+        sys.exit("Please provide valide mode, [NM, IM, NL, RAND]")
 
 
 if __name__ == "__main__":
