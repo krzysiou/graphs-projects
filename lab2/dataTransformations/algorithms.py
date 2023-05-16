@@ -291,31 +291,25 @@ def generateRegularGraph(nodes, level):
         if all(sequence[i] == level for i in range(len(sequence))):
             return neighbourList
 
-def checkIfHamiltonian(neighbourList):
-    n = len(neighbourList)
-    path = []
-    path.append(0)
-    unvisited = set(range(1, n))
+def checkHamiltonian(neighbourList: list, vertex: int = 0, path: list = None):
+    if path is None:
+        path = []
     
-    while unvisited:
-        neighbours = neighbourList[path[-1]]
-
-        for neighbour in neighbours:
-            if neighbour in unvisited:
-                path.append(neighbour)
-                unvisited.remove(neighbour)
-                break
-
-        else:
-            if len(path) == 1:
-                print("This graph is not Hamiltonian!\n")
-                return False
-            unvisited.add(path.pop())
-
-    if path[-1] in neighbourList[path[0]]:
-        print("This graph is Hamiltonian!\n")
-        print(f"Hamiltonian cycle: {path}\n")
-        return True
-    else:
-        print("This graph is not Hamiltonian!\n")
-        return False
+    size = len(neighbourList)
+    print(size)
+    if vertex+1 not in set(path):
+        path.append(vertex+1)
+        print(path)
+        if len(path) == size:
+            if path[-1] in neighbourList[path[0]-1]:
+                path.append(path[0])
+                return [path_step for path_step in path]
+            else:
+                path.pop()
+                return None
+ 
+        for neighbour in neighbourList[vertex]:
+            path_copy = path[:]
+            isHamilton = checkHamiltonian(neighbourList, neighbour-1, path_copy)
+            if isHamilton:
+                return isHamilton
