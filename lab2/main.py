@@ -22,8 +22,6 @@ def main(mode, second_argument):
         seqArray = readLine(second_argument)
         neighbourList = constructNLFromSeq(seqArray)
 
-        print(neighbourList)
-
         comp = calculateIntegrityArray(seqArray, neighbourList)
         connectedComponents(comp)
         drawGraph(neighbourList)
@@ -47,10 +45,13 @@ def main(mode, second_argument):
         neighbourList = readList(second_argument)
 
         hamiltonianCycle = checkHamiltonian(neighbourList)
+
         if hamiltonianCycle:
             print(f"Graph is Hamiltonian.\nCycle: {hamiltonianCycle}")
         else:
             print("Graph is not Hamiltonian.")
+
+        drawGraphV2(neighbourList)
 
     else:
         sys.exit(

@@ -1,6 +1,5 @@
 import sys
 
-# from dataTransformations.readData import *
 from dataTransformations.algorithms import *
 from utils import *
 
@@ -15,6 +14,7 @@ def main(mode, num):
             for _ in range(len(generateEdgesList(neighbourList)))
         ]
         drawGraph(neighbourList, edgesValues)
+
     elif mode == "task2":
         startNode = int(num)
         neighbourList = generateConnectedGraph(5, 8)
@@ -25,6 +25,7 @@ def main(mode, num):
         d, p = dijkstra(neighbourList, edgesValues, startNode - 1)
         printSolution(d, p, startNode - 1)
         drawGraph(neighbourList, edgesValues)
+
     elif mode == "task3":
         neighbourList = generateConnectedGraph(5, 6)
         edgesValues = [
@@ -33,6 +34,7 @@ def main(mode, num):
         ]
         printMatrix(lengthMatrix(neighbourList, edgesValues))
         drawGraph(neighbourList, edgesValues)
+
     elif mode == "task4":
         neighbourList = generateConnectedGraph(5, 6)
         edgesValues = [
@@ -47,6 +49,7 @@ def main(mode, num):
         print(
             f"Centrum minimax = {miniMaxCentIdx + 1} (odległość od najdalszego: {miniMaxCentLen})"
         )
+
     elif mode == "task5":
         neighbourList = generateConnectedGraph(6, 12)
         edgesValues = [
