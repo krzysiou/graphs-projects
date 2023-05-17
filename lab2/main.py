@@ -44,11 +44,13 @@ def main(mode, second_argument):
         drawGraphV2(regularNeighbourList)
 
     elif mode == "task6":
-        seqArray = readLine(second_argument)
-        neighbourList = constructNLFromSeq(seqArray)
+        neighbourList = readList(second_argument)
 
-        checkIfHamiltonian(neighbourList)
-        drawGraph(neighbourList)
+        hamiltonianCycle = checkHamiltonian(neighbourList)
+        if hamiltonianCycle:
+            print(f"Graph is Hamiltonian.\nCycle: {hamiltonianCycle}")
+        else:
+            print("Graph is not Hamiltonian.")
 
     else:
         sys.exit(

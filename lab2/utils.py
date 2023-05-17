@@ -102,7 +102,7 @@ def isEdgeExists(edge, listOfEdges):
 def connectedComponents(comp):
     tempDict = {}
     for index, value in enumerate(comp):
-        tempDict[index+1] = value
+        tempDict[index + 1] = value
     print("Connected components:")
     for i in range(max(comp)):
         print(f"{i+1}) {[key for key, value in tempDict.items() if value == i+1]}")
