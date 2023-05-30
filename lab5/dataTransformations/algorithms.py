@@ -2,10 +2,11 @@ import sys
 import numpy as np
 import copy
 import random
+from collections import deque
 
 
 def generateFlowNetwork(N):
-    if N < 2:
+    if N <= 2:
         sys.exit("N must be greater than 2")
 
     graphLayers = generateVerticesLayers(N)
@@ -88,3 +89,65 @@ def generateEdgeValues(edgesList):
     for _ in range(len(edgesList)):
         edgeValues.append(random.randint(1, 10))
     return edgeValues
+
+
+def convertToNeighbourMatrix(graphEdges, edgeValues, N):
+    neighbourMatrix = np.array([[0 for _ in range(N+1)] for _ in range(N+1)])
+    for i in range(len(graphEdges)):
+        neighbourMatrix[graphEdges[i][0]][graphEdges[i][1]] = edgeValues[i]
+    return neighbourMatrix
+
+
+def bfs(graph, residual_capacity, parent, source, target):
+    visited = [False] * len(graph)
+    queue = deque([source])
+    visited[source] = True
+
+    while queue:
+        current_node = queue.popleft()
+
+        for neighbor in range(len(graph)):
+            if not visited[neighbor] and residual_capacity[current_node][neighbor] > 0:
+                queue.append(neighbor)
+                visited[neighbor] = True
+                parent[neighbor] = current_node
+
+                if neighbor == target:
+                    return True, parent
+
+    return False, parent
+
+
+def ford_fulkerson(G, s, t):
+    num_vertices = len(G)
+
+    residual_capacity = [[0] * num_vertices for _ in range(num_vertices)]
+    for u in range(num_vertices):
+        for v in range(num_vertices):
+            residual_capacity[u][v] = G[u][v]
+
+    max_flow = 0
+
+    while True:
+        parent = [-1] * num_vertices
+
+        found_path, parent = bfs(G, residual_capacity, parent, s, t)
+
+        if not found_path:
+            break
+
+        min_capacity = float('inf')
+        node = t
+        while node != s:
+            min_capacity = min(min_capacity, residual_capacity[parent[node]][node])
+            node = parent[node]
+
+        node = t
+        while node != s:
+            residual_capacity[parent[node]][node] -= min_capacity
+            residual_capacity[node][parent[node]] += min_capacity
+            node = parent[node]
+
+        max_flow += min_capacity
+
+    return max_flow
