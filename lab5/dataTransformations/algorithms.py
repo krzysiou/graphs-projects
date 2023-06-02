@@ -98,56 +98,53 @@ def convertToNeighbourMatrix(graphEdges, edgeValues, N):
     return neighbourMatrix
 
 
-def bfs(graph, residual_capacity, parent, source, target):
-    visited = [False] * len(graph)
-    queue = deque([source])
-    visited[source] = True
-
+def bfs(G, residualCapacity, parent, s, t):
+    visited = [False] * len(G)
+    queue = deque([s])
+    visited[s] = True
     while queue:
-        current_node = queue.popleft()
-
-        for neighbor in range(len(graph)):
-            if not visited[neighbor] and residual_capacity[current_node][neighbor] > 0:
-                queue.append(neighbor)
-                visited[neighbor] = True
-                parent[neighbor] = current_node
-
-                if neighbor == target:
+        currentNode = queue.popleft()
+        for neighbour in range(len(G)):
+            if not visited[neighbour] and residualCapacity[currentNode][neighbour] > 0:
+                queue.append(neighbour)
+                visited[neighbour] = True
+                parent[neighbour] = currentNode
+                if neighbour == t:
                     return True, parent
-
     return False, parent
 
 
-def ford_fulkerson(G, s, t):
-    num_vertices = len(G)
-
-    residual_capacity = [[0] * num_vertices for _ in range(num_vertices)]
-    for u in range(num_vertices):
-        for v in range(num_vertices):
-            residual_capacity[u][v] = G[u][v]
-
-    max_flow = 0
-
+def fordFulkerson(G, s, t):
+    numOfVertices = len(G)
+    residualCapacity = [[0] * numOfVertices for _ in range(numOfVertices)]
+    for u in range(numOfVertices):
+        for v in range(numOfVertices):
+            residualCapacity[u][v] = G[u][v]
+    maxFlow = 0
+    flowPath = []
     while True:
-        parent = [-1] * num_vertices
-
-        found_path, parent = bfs(G, residual_capacity, parent, s, t)
-
-        if not found_path:
+        parent = [-1] * numOfVertices
+        foundPath, parent = bfs(G, residualCapacity, parent, s, t)
+        if not foundPath:
             break
-
-        min_capacity = float('inf')
+        minCapacity = float('inf')
         node = t
         while node != s:
-            min_capacity = min(min_capacity, residual_capacity[parent[node]][node])
+            minCapacity = min(minCapacity, residualCapacity[parent[node]][node])
             node = parent[node]
-
         node = t
         while node != s:
-            residual_capacity[parent[node]][node] -= min_capacity
-            residual_capacity[node][parent[node]] += min_capacity
+            flowPath.append(([parent[node], node], minCapacity))
+            residualCapacity[parent[node]][node] -= minCapacity
+            residualCapacity[node][parent[node]] += minCapacity
             node = parent[node]
+        maxFlow += minCapacity
+    return maxFlow, flowPath
 
-        max_flow += min_capacity
 
-    return max_flow
+def calculateMaxFlowPath(G, flowPath, capacities):
+    flows = []
+    for graphEdge in G:
+        graphEdgeSum = sum([t[1] for t in flowPath if t[0] == graphEdge])
+        flows.append(graphEdgeSum)
+    return [str(flow) + "/" + str(capacity) for flow, capacity in zip(flows, capacities)]

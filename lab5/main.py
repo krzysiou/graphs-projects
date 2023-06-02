@@ -9,10 +9,11 @@ def main(mode, numberOfLayers=4):
         [graphLayers, graphEdges, edgeValues] = generateFlowNetwork(numberOfLayers)
         drawFlowNetwork(graphEdges, graphLayers, edgeValues)
     elif mode == "task2":
-        [graphLayers, graphEdges, edgeValues] = generateFlowNetwork(numberOfLayers)
-        neighbourMatrix = convertToNeighbourMatrix(graphEdges, edgeValues, graphLayers[numberOfLayers+1][0])
-        maxFlow = ford_fulkerson(neighbourMatrix, graphLayers[0][0], graphLayers[numberOfLayers+1][0])
-        print(maxFlow)
+        [graphLayers, graphEdges, capacities] = generateFlowNetwork(numberOfLayers)
+        neighbourMatrix = convertToNeighbourMatrix(graphEdges, capacities, graphLayers[numberOfLayers+1][0])
+        maxFlow, flowPath = fordFulkerson(neighbourMatrix, graphLayers[0][0], graphLayers[numberOfLayers+1][0])
+        edgeValues = calculateMaxFlowPath(graphEdges, flowPath, capacities)
+        print(f"Max flow: {maxFlow}")
         drawFlowNetwork(graphEdges, graphLayers, edgeValues)
     else:
         sys.exit("Please provide valide mode, [task1, task2]")
