@@ -108,7 +108,8 @@ def components(integrityNumber, index, neighbourList, comp):
     for i in neighbours:
         if comp[i] == -1:
             comp[i] = integrityNumber
-            componentsV2(integrityNumber, i, neighbourList, comp)
+            # componentsV2(integrityNumber, i, neighbourList, comp)
+            components(integrityNumber, i, neighbourList, comp)
 
 
 def calculateIntegrityArrayV2(sequence, neighbourList):
@@ -291,25 +292,24 @@ def generateRegularGraph(nodes, level):
         if all(sequence[i] == level for i in range(len(sequence))):
             return neighbourList
 
+
 def checkHamiltonian(neighbourList: list, vertex: int = 0, path: list = None):
     if path is None:
         path = []
-    
+
     size = len(neighbourList)
-    print(size)
-    if vertex+1 not in set(path):
-        path.append(vertex+1)
-        print(path)
+    if vertex + 1 not in set(path):
+        path.append(vertex + 1)
         if len(path) == size:
-            if path[-1] in neighbourList[path[0]-1]:
+            if path[-1] in neighbourList[path[0] - 1]:
                 path.append(path[0])
                 return [path_step for path_step in path]
             else:
                 path.pop()
                 return None
- 
+
         for neighbour in neighbourList[vertex]:
             path_copy = path[:]
-            isHamilton = checkHamiltonian(neighbourList, neighbour-1, path_copy)
+            isHamilton = checkHamiltonian(neighbourList, neighbour - 1, path_copy)
             if isHamilton:
                 return isHamilton

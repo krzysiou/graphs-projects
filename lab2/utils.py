@@ -97,3 +97,13 @@ def sortDict(A, mode="asc"):
 def isEdgeExists(edge, listOfEdges):
     reversed = edge[::-1]
     return tuple(edge) in listOfEdges or tuple(reversed) in listOfEdges
+
+
+def connectedComponents(comp):
+    tempDict = {}
+    for index, value in enumerate(comp):
+        tempDict[index + 1] = value
+    print("Connected components:")
+    for i in range(max(comp)):
+        print(f"{i+1}) {[key for key, value in tempDict.items() if value == i+1]}")
+    print(f"Number of the largest component: {max(set(comp), key = comp.count)}")
