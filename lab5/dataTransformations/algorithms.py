@@ -6,12 +6,13 @@ from collections import deque
 
 
 def generateFlowNetwork(N):
-    if N <= 2:
+    if N < 2:
         sys.exit("N must be greater than 2")
 
     graphLayers = generateVerticesLayers(N)
     graphEdges = generateGraphEdges(graphLayers)
-    graphEdges = addRandomEdges(graphEdges, graphLayers)
+    if N != 2:
+        graphEdges = addRandomEdges(graphEdges, graphLayers)
     edgeValues = generateEdgeValues(graphEdges)
 
     return [graphLayers, graphEdges, edgeValues]
@@ -92,7 +93,8 @@ def generateEdgeValues(edgesList):
 
 
 def convertToNeighbourMatrix(graphEdges, edgeValues, N):
-    neighbourMatrix = np.array([[0 for _ in range(N+1)] for _ in range(N+1)])
+    neighbourMatrix = np.array([[0 for _ in range(N + 1)]
+                               for _ in range(N + 1)])
     for i in range(len(graphEdges)):
         neighbourMatrix[graphEdges[i][0]][graphEdges[i][1]] = edgeValues[i]
     return neighbourMatrix
@@ -130,7 +132,8 @@ def fordFulkerson(G, s, t):
         minCapacity = float('inf')
         node = t
         while node != s:
-            minCapacity = min(minCapacity, residualCapacity[parent[node]][node])
+            minCapacity = min(
+                minCapacity, residualCapacity[parent[node]][node])
             node = parent[node]
         node = t
         while node != s:
