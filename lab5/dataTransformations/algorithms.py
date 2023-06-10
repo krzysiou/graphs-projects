@@ -93,8 +93,7 @@ def generateEdgeValues(edgesList):
 
 
 def convertToNeighbourMatrix(graphEdges, edgeValues, N):
-    neighbourMatrix = np.array([[0 for _ in range(N + 1)]
-                               for _ in range(N + 1)])
+    neighbourMatrix = np.array([[0 for _ in range(N + 1)] for _ in range(N + 1)])
     for i in range(len(graphEdges)):
         neighbourMatrix[graphEdges[i][0]][graphEdges[i][1]] = edgeValues[i]
     return neighbourMatrix
@@ -129,11 +128,10 @@ def fordFulkerson(G, s, t):
         foundPath, parent = bfs(G, residualCapacity, parent, s, t)
         if not foundPath:
             break
-        minCapacity = float('inf')
+        minCapacity = float("inf")
         node = t
         while node != s:
-            minCapacity = min(
-                minCapacity, residualCapacity[parent[node]][node])
+            minCapacity = min(minCapacity, residualCapacity[parent[node]][node])
             node = parent[node]
         node = t
         while node != s:
@@ -150,4 +148,6 @@ def calculateMaxFlowPath(G, flowPath, capacities):
     for graphEdge in G:
         graphEdgeSum = sum([t[1] for t in flowPath if t[0] == graphEdge])
         flows.append(graphEdgeSum)
-    return [str(flow) + "/" + str(capacity) for flow, capacity in zip(flows, capacities)]
+    return [
+        str(flow) + "/" + str(capacity) for flow, capacity in zip(flows, capacities)
+    ]
