@@ -76,7 +76,7 @@ def drawFlowNetwork(edgesList, layers, edgeValues):
         edge_width=2,
         edge_color="rgba(0,0,0,0.3)",
         edge_label=edgeValues,
-        edge_label_size=14,
+        edge_label_size=10,
         edge_curved=0.1,
     )
 
