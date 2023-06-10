@@ -29,7 +29,7 @@ def main(mode):
 
         lenMatrix = []
         for i in range(nodesCount):
-            res = bellman_ford(edges_list, edgesValues, i)
+            res = bellman_ford(edges_list, edgesValues, nodesCount, i)
             if res:
                 lenMatrix.append(res[:nodesCount])
             else:
@@ -38,7 +38,7 @@ def main(mode):
         drawGraphWithValues(edges_list, edgesValues)
 
     elif mode == "task4":
-        nodesCount = 5
+        nodesCount = 4
         while True:
             edges_list = generateDigraph(nodesCount, 0.2)
             result = kosaraju(edges_list)
@@ -47,12 +47,14 @@ def main(mode):
 
         edgesValues = [np.random.randint(-1, 10)
                        for _ in range(len(edges_list))]
-        if D := johnson(edges_list, edgesValues, nodesCount, verbose=True):
-            printMatrix(D)
+
+        drawGraphWithValues(edges_list, edgesValues)
+        D = johnson(edges_list, edgesValues, nodesCount, verbose=True)
+        printMatrix(D)
 
     else:
         sys.exit(
-            "Please provide valide mode, [task1, task2, task3, task4, task5]")
+            "Please provide valide mode, [task1, task2, task3, task4]")
 
 
 if __name__ == "__main__":
@@ -60,7 +62,7 @@ if __name__ == "__main__":
 
     if len(programArguments) != 2:
         sys.exit(
-            "Please provide two arguments, first is the mode [task1, task2, task3, task4, task5]"
+            "Please provide two arguments, first is the mode [task1, task2, task3, task4]"
         )
 
     main(programArguments[1])

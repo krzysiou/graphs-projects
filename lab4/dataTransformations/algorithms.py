@@ -130,15 +130,16 @@ def components_r(nr, v, reverse_neighbour_list, comp):
             components_r(nr, u, reverse_neighbour_list, comp)
 
 
-def bellman_ford(edges_list, edgesValues, s):
+def bellman_ford(edges_list, edgesValues, nodeCount, s):
     edgesLen = len(edges_list)
-    distance = [np.inf for _ in range(edgesLen)]
+    distance = [np.inf for _ in range(nodeCount)]
     distance[s] = 0
 
-    for _ in range(edgesLen - 1):
-        for i in range(len(edges_list)):
+    for _ in range(nodeCount):
+        for i in range(edgesLen):
             if distance[edges_list[i][1]] > distance[edges_list[i][0]] + edgesValues[i]:
-                distance[edges_list[i][1]] = distance[edges_list[i][0]] + edgesValues[i]
+                distance[edges_list[i][1]
+                         ] = distance[edges_list[i][0]] + edgesValues[i]
 
     for i in range(len(edges_list)):
         if distance[edges_list[i][1]] > distance[edges_list[i][0]] + edgesValues[i]:
