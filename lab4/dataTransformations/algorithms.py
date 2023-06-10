@@ -152,34 +152,37 @@ def bellman_ford(edges_list, edgesValues, nodeCount, s):
 def johnson(edges_list, edgesValues, nodesCount, verbose=False):
     edgesLen = len(edges_list)
 
-    G_prim_edges, G_prim_edgesValues = add_s(edges_list, edgesValues, nodesCount)
+    G_prim_edges, G_prim_edgesValues = add_s(
+        edges_list, edgesValues, nodesCount)
+    print(G_prim_edges)
     if verbose:
         drawGraphWithValues(G_prim_edges, G_prim_edgesValues)
 
-    if (d := bellman_ford(G_prim_edges, G_prim_edgesValues, nodesCount)) == False:
-        return False
+    if (d := bellman_ford(G_prim_edges, G_prim_edgesValues, nodesCount + 1, nodesCount)) == False:
+        sys.exit("Graph contains negative cycle")
 
     h = copy.deepcopy(d)
+    if verbose:
+        print("h: ", h)
+
     w_prim = [
-        edgesValues[i] + h[edges_list[i][0]] - h[edges_list[i][1]]
-        for i in range(edgesLen)
+        G_prim_edgesValues[i] + h[G_prim_edges[i][0]] - h[G_prim_edges[i][1]]
+        for i in range(len(G_prim_edges))
     ]
 
     D = np.zeros((nodesCount, nodesCount), dtype="int")
-
     neighbour_list = convertEdgesToNeighbourList(edges_list)
-    d_prim = [dijkstra(neighbour_list, w_prim, i)[0] for i in range(nodesCount)]
-
-    D = [
-        [d_prim[i][j] + h[j] - h[i] for j in range(nodesCount)]
-        for i in range(nodesCount)
-    ]
+    for u in range(nodesCount):
+        d_prim = dijkstra(neighbour_list, w_prim, u)[0]
+        if verbose:
+            print(d_prim)
+        for v in range(nodesCount):
+            D[u][v] = d_prim[v] + h[v] - h[u]
 
     return D
 
 
 def add_s(edges_list, edgesValues, nodesCount):
-    edgesLen = len(edges_list)
     G_prim = copy.deepcopy(edges_list)
     G_prim_edgesValues = copy.deepcopy(edgesValues)
     G_prim.extend([nodesCount, index] for index in range(nodesCount))
