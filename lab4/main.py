@@ -4,7 +4,7 @@ from utils import *
 from dataTransformations.algorithms import *
 
 
-def main(mode, input_file):
+def main(mode):
     if mode == "task1":
         edgesList = generateDigraph(5, 0.3)
         drawGraph(edgesList)
@@ -24,11 +24,12 @@ def main(mode, input_file):
             if len(set(result)) == 1:
                 break
 
-        edgesValues = [np.random.randint(-5, 10) for _ in range(len(edges_list))]
+        edgesValues = [np.random.randint(-5, 10)
+                       for _ in range(len(edges_list))]
 
         lenMatrix = []
         for i in range(nodesCount):
-            res = bellman_ford(edges_list, edgesValues, i)
+            res = bellman_ford(edges_list, edgesValues, nodesCount, i)
             if res:
                 lenMatrix.append(res[:nodesCount])
             else:
@@ -37,27 +38,31 @@ def main(mode, input_file):
         drawGraphWithValues(edges_list, edgesValues)
 
     elif mode == "task4":
-        nodesCount = 5
+        nodesCount = 4
         while True:
             edges_list = generateDigraph(nodesCount, 0.2)
             result = kosaraju(edges_list)
             if len(set(result)) == 1:
                 break
 
-        edgesValues = [np.random.randint(-1, 10) for _ in range(len(edges_list))]
-        if D := johnson(edges_list, edgesValues, nodesCount, verbose=True):
-            printMatrix(D)
+        edgesValues = [np.random.randint(-1, 10)
+                       for _ in range(len(edges_list))]
+
+        drawGraphWithValues(edges_list, edgesValues)
+        D = johnson(edges_list, edgesValues, nodesCount, verbose=True)
+        printMatrix(D)
 
     else:
-        sys.exit("Please provide valide mode, [task1, task2, task3, task4, task5]")
+        sys.exit(
+            "Please provide valide mode, [task1, task2, task3, task4]")
 
 
 if __name__ == "__main__":
     programArguments = sys.argv
 
-    if len(programArguments) != 3:
+    if len(programArguments) != 2:
         sys.exit(
-            "Please provide two arguments, first is the mode [task1, task2, task3, task4, task5], second one is input file name."
+            "Please provide two arguments, first is the mode [task1, task2, task3, task4]"
         )
 
-    main(programArguments[1], programArguments[2])
+    main(programArguments[1])
