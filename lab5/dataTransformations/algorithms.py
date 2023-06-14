@@ -11,8 +11,7 @@ def generateFlowNetwork(N):
 
     graphLayers = generateVerticesLayers(N)
     graphEdges = generateGraphEdges(graphLayers)
-    if N != 2:
-        graphEdges = addRandomEdges(graphEdges, graphLayers)
+    graphEdges = addRandomEdges(graphEdges, graphLayers)
     edgeValues = generateEdgeValues(graphEdges)
 
     return [graphLayers, graphEdges, edgeValues]
@@ -60,12 +59,12 @@ def generateGraphEdges(graphLayers):
 
 
 def addRandomEdges(graphEdges, graphLayers):
-    N = len(graphLayers)
+    N = len(graphLayers) - 2
     edgesList = copy.deepcopy(graphEdges)
 
     newEdgesCount = 0
     while True:
-        for i in range(1, N - 2):
+        for i in range(1, N + 1):
             currentLayerVertices = graphLayers[i] + graphLayers[i + 1]
 
             randomEdge = [
