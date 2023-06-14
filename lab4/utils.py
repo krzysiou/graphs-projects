@@ -70,3 +70,10 @@ def convertEdgesToNeighbourList(edges):
 def printMatrix(a):
     for _, val in enumerate(a):
         print("  ".join(map(str, val)))
+
+
+def printEdgesWeights(edges, edgesValues):
+    print("Edges weights: ")
+    for i, edge in enumerate(edges):
+        print(f"{edge[0]+1} -> {edge[1]+1} = {edgesValues[i]}")
+    print()
