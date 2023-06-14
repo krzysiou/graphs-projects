@@ -10,7 +10,7 @@ double getCycleLen(const std::array<std::array<int, 2>, N>& nodes, const std::ve
   return sum + sqrt(pow(nodes[cycle[0]][1] - nodes[prevNode][1], 2) + pow(nodes[cycle[0]][0] - nodes[prevNode][0], 2));
 }
 
-void swapEdges(uint32_t ab, uint32_t cd, std::vector<uint32_t>& cycle) {
+void swapEdgesOpt2(uint32_t ab, uint32_t cd, std::vector<uint32_t>& cycle) {
   uint32_t tmp;
   if (cd < ab) {
     tmp = ab;
@@ -57,7 +57,7 @@ std::vector<uint32_t> simulatedAnnealing(const std::string& filename, const std:
   std::cout << "\n Initial cycle length  (" + filename + "): " << PLen << std::endl;
   
   
-  for (uint32_t i = MIN_I; i >= 1; i--) {
+  for (uint32_t i = MIN_IT_T_LOWERING; i >= 1; i--) {
     T = T_MODIFIER * pow(static_cast<double>(i), 2);
     for (uint32_t it = 0; it < MAX_IT; it++) {
       ABEdge = 0, CDEdge = 0;
@@ -68,7 +68,7 @@ std::vector<uint32_t> simulatedAnnealing(const std::string& filename, const std:
 
       newP = P;
 
-      swapEdges(ABEdge, CDEdge, newP);
+      swapEdgesOpt2(ABEdge, CDEdge, newP);
 
       PLen = getCycleLen(V, P);
       newPLen = getCycleLen(V, newP);
