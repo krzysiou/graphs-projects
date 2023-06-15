@@ -1,6 +1,8 @@
 #include "algorithms.h"
 
-
+//SPOSÓB WYWOŁANIA:
+//Po skompilowaniu programu generowane są pliki beforeX.dat oraz afterX.dat przechowujące cykle przed i po wywołaniu algorytmu
+//Skrypt plot.plt (korzystałem z gnuplot'a) generuje wizualną reprezentację cykli w plikach beforeX.pdf i afterX.pdf
 int main(int argc, char const *argv[])
 {
   srand(time(NULL));
