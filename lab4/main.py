@@ -24,9 +24,8 @@ def main(mode):
             if len(set(result)) == 1:
                 break
 
-        edgesValues = [np.random.randint(-5, 10)
-                       for _ in range(len(edges_list))]
-
+        edgesValues = [np.random.randint(-5, 10) for _ in range(len(edges_list))]
+        printEdgesWeights(edges_list, edgesValues)
         lenMatrix = []
         for i in range(nodesCount):
             res = bellman_ford(edges_list, edgesValues, nodesCount, i)
@@ -45,16 +44,15 @@ def main(mode):
             if len(set(result)) == 1:
                 break
 
-        edgesValues = [np.random.randint(-1, 10)
-                       for _ in range(len(edges_list))]
+        edgesValues = [np.random.randint(-1, 10) for _ in range(len(edges_list))]
+        printEdgesWeights(edges_list, edgesValues)
 
         drawGraphWithValues(edges_list, edgesValues)
         D = johnson(edges_list, edgesValues, nodesCount, verbose=True)
         printMatrix(D)
 
     else:
-        sys.exit(
-            "Please provide valide mode, [task1, task2, task3, task4]")
+        sys.exit("Please provide valide mode, [task1, task2, task3, task4]")
 
 
 if __name__ == "__main__":
